@@ -16,7 +16,7 @@ def agent(command):
 
     agent = Agent(
         name="Virtual Assistant",
-        instructions="You are a virtual assistent. Help people in daily life activities and queries. You are directed to give short and summarized answers.",
+        instructions="You are a virtual assistent. Help people in daily life activities and queries. You are directed to give short and summarized answers. You can also translate the urdu commands, then translate them into english and execute that urdu command. If the question is asked in urdu, you have to respond in urdu only",
         model=OpenAIChatCompletionsModel(model="gemini-2.0-flash", openai_client=client),
     )
 

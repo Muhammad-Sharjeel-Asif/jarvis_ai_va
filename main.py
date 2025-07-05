@@ -2,7 +2,6 @@ import speech_recognition as sr
 import os
 import webbrowser
 import pyttsx3
-import Playlist
 from dotenv import load_dotenv
 import requests
 from agent import agent
@@ -17,29 +16,27 @@ rate = engine.getProperty('rate')
 engine.setProperty('rate', 170)
 
 def processCommand(c):
-    if "open google" in c.lower():
+    if "open google" in c.lower() or "google kholo" in c.lower():
         speak("opening google...")
         webbrowser.open("https://www.google.com")
-    elif "open youtube" in c.lower():
+    elif "open youtube" in c.lower() or "youtube kholo" in c.lower():
         speak("opening youtube...")
         webbrowser.open("https://www.youtube.com")
-    elif "open facebook" in c.lower():
+    elif "open facebook" in c.lower() or "facebook kholo" in c.lower():
         speak("opening facebook...")
         webbrowser.open("https://www.facebook.com")
-    elif "open instagram" in c.lower():
+    elif "open instagram" in c.lower() or "instagram kholo" in c.lower():
         speak("opening instagram...")
         webbrowser.open("https://www.instagram.com")
-    elif "open linkedin" in c.lower():
+    elif "open linkedin" in c.lower() or "linkedin kholo" in c.lower():
         speak("opening linkedin...")
         webbrowser.open("https://www.linkedin.com")
-    elif "open twitter" in c.lower():
+    elif "open twitter" in c.lower() or "twitter kholo" in c.lower():
         speak("opening twitter...")
         webbrowser.open("https://www.twitter.com")
-
-    elif c.lower().startswith("play"):
-        song = c.lower().split(" ")[1]
-        link = Playlist.playlists[song]
-        webbrowser.open(link)
+    elif "open chatgpt" in c.lower() or "chatgpt kholo" in c.lower():
+        speak("opening chatgpt...")
+        webbrowser.open("https://www.chatgpt.com")
 
     elif "news" in c.lower():
         speak("Getting news...")
@@ -56,13 +53,10 @@ def processCommand(c):
             speak("An error occurred while getting the news.")
             print(f"Error: {e}")
 
-
-    
     else:
         output = agent(c)
         speak(output)
         print(output)
-
 
 def speak(text):
     engine.say(text)
@@ -86,7 +80,7 @@ if __name__ == "__main__":
                 command = r.recognize_google(audio)
                 print(command)
 
-            if("jarvis" in command.lower()):
+            if "jarvis" in command.lower():
                 speak("Ya")
 
                 # listening command
@@ -97,9 +91,9 @@ if __name__ == "__main__":
 
                     processCommand(command)
 
-            elif ("exit" in command.lower()):
+            if ("exit" in command.lower()):
                 speak("Exiting Jarvis")
                 break
 
         except Exception as e:
-                        print("Waiting for your command")
+            print("Waiting for your command")
